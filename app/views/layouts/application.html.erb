@@ -1,14 +1,27 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FanSite</title>
+    <title><%= yield(:title) %></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  <header>
+    <% if current_user %>
+    <%= link_to('Logout', destroy_user_session_path, method: :delete) %>
+    <% else %>
+    <h1>LOG IN, YOU DERP?</h1>
+    <%= link_to('Login', new_user_session_path)  %>
+    <%= link_to('Register', new_user_registration_path)  %>
+    <% end %>
+  </header>
   <body>
-    <%= yield %>
+    <div class="container">
+      <%= flash[:alert] %>
+      <%= flash[:notice] %>
+
+      <%= yield %>
+    </div>
   </body>
 </html>
