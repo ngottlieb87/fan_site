@@ -15,7 +15,7 @@ class AlbumsController < ApplicationController
 
   def show
     @artist = Artist.find(params[:id])
-    @albums = @artist.albums.order(:get_upvotes.size => :desc)
+    @albums = @artist.albums
   end
 
   def destroy
