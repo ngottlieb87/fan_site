@@ -1,0 +1,8 @@
+<%= render "layouts/errors", :object => @artist %>
+
+<%= form_for [@genre, @artist] do |f| %>
+<h1><%= @genre.id %></h1>
+  <%= f.label :title%>
+  <%= f.text_field :title %>
+  <%= f.submit %>
+<% end %>

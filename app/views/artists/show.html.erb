@@ -1,0 +1,25 @@
+<h1><%= @genre.title %></h1>
+
+<% if @artists.any? %>
+  <h4>Here are the artists for this genre:</h4>
+
+  <ul>
+    <% @artists.each do |artist| %>
+      <li>
+        <h3><%=link_to artist.title, album_path(artist) %></h3>
+        <% if current_user.email == "admin@admin.com"  %>
+        <%= link_to "Edit", edit_genre_artist_path(@genre, artist) %> |
+        <%= link_to "Delete", genre_artist_path(@genre, artist),
+                                 :data => {:confirm => "Are you sure?",
+                                                :method => "delete"} %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no artists yet!</p>
+<% end %>
+
+<p><%= link_to "Add an artist", new_genre_artist_path(@genre) %></p>
+
+<p><%= link_to "Return to genres", genres_path %></p>

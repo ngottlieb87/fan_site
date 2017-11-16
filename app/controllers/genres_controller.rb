@@ -21,20 +21,6 @@ class GenresController < ApplicationController
     @genre = Genre.find(params[:id])
   end
 
-  def upvote
-    @genre= Genre.find(params[:id])
-    @genre.upvote_by current_user
-    @genres = Genre.all
-    redirect_to :genres
-  end
-
-  def downvote
-    @genre = Genre.find(params[:id])
-    @genre.downvote_by current_user
-    @genres = Genre.all
-    redirect_to :genres
-  end
-
 private
   def genre_params
     params.require(:genre).permit(:title)

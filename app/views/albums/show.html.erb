@@ -1,0 +1,37 @@
+<h1><%= @artist.title %></h1>
+
+<% if @albums.any? %>
+  <h4>Here are the albums for this artist:</h4>
+
+  <ul>
+    <% @albums.each do |album| %>
+      <li>
+        <h3><%=link_to album.title, album_path(album) %></h3>
+
+        <% if current_user %>
+          <%= link_to like_album_path(album), method: :put do %>
+            Upvote
+            <%= album.get_upvotes.size %>
+          <% end %>
+          <%= link_to dislike_album_path(album), method: :put do %>
+              Downvote
+              <%= album.get_downvotes.size %>
+          <% end %>
+        <% end %>
+
+        <% if current_user.email == "admin@admin.com" %>
+          <%= link_to "Edit", edit_artist_album_path(@artist, album) %> |
+          <%= link_to "Delete", artist_album_path(@artist, album),
+                                   :data => {:confirm => "Are you sure?",
+                                                  :method => "delete"} %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no albums yet!</p>
+<% end %>
+
+<p><%= link_to "Add an Artist", new_artist_album_path(@artist) %></p>
+
+<p><%= link_to "Return to albums", albums_path %></p>
