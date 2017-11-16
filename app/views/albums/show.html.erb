@@ -1,10 +1,27 @@
 <h1><%= @artist.title %></h1>
 
+<div class="dropdown">
+  <button class="btn btn-dark dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    Filter By:
+  </button>
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+    <a class="dropdown-item" href="/albums/<%= @artist.id %>">All</a>
+    <a class="dropdown-item" href="?sort=name">Name</a>
+    <a class="dropdown-item" href="?sort=created">Created</a>
+    <a class="dropdown-item" href="?sort=popular">Popular</a>
+    <a class="dropdown-item" href="?sort=pathetic">Pathetic</a>
+  </div>
+</div>
+
+
 <% if @albums.any? %>
   <h4>Here are the albums for this artist:</h4>
 
+  <!-- <%= select("area", "name", Artist.all.collect(&:title)) %> -->
   <ul>
+
     <% @albums.each do |album| %>
+
       <li>
         <h3><%=link_to album.title, album_path(album) %></h3>
 

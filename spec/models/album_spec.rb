@@ -1,5 +1,8 @@
 require 'rails_helper'
 
-RSpec.describe Album, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+describe Album do
+  it { should validate_presence_of :title}
+  it { should validate_presence_of :artist_id}
+  it { should belong_to :artist }
+  it { should have_many :reviews }
 end

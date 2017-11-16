@@ -15,7 +15,16 @@ class AlbumsController < ApplicationController
 
   def show
     @artist = Artist.find(params[:id])
-    @albums = @artist.albums
+    @albums = @artist.albums.order(:cached_votes_up => :desc)
+    if params[:sort] == "name"
+      @albums = @artist.albums.order(:title => :asc).limit(10)
+    elsif params[:sort] == "popular"
+      @albums = @artist.albums.order(:cached_votes_up => :desc)
+    elsif params[:sort] == "pathetic"
+      @albums = @artist.albums.order(:cached_votes_up => :asc)
+    elsif params[:sort] == "created"
+      @albums = @artist.albums.order(:created_at => :asc)
+    end
   end
 
   def destroy

@@ -17,7 +17,7 @@ end
 p "Created #{Genre.count} genres"
 
 #seeding artists
-50.times do |index|
+50.times do
   Artist.create!(title: Faker::RockBand.unique.name,
                 genre_id: Faker::Number.between(1, 6))
 end
@@ -25,7 +25,7 @@ end
 p "Created #{Artist.count} artists"
 
 #seeding albums
-100.times do |index|
+7200.times do
   Album.create!(title: Faker::Hipster.unique.sentence(5),
                 artist_id: Faker::Number.between(1, 50))
 end
