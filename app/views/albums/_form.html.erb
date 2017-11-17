@@ -1,6 +1,6 @@
 <%= render "layouts/errors", :object => @album %>
 
-<%= form_for @album do |f| %>
+<%= form_for [@artist , @album] do |f| %>
   <%= f.label :title%>
   <%= f.text_field :title %>
   <%= f.submit %>

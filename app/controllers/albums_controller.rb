@@ -1,13 +1,15 @@
 class AlbumsController < ApplicationController
   def new
+    @artist = Artist.find(params[:artist_id])
     @album = Album.new
   end
 
   def create
-    @album = Album.new(album_params)
+    @artist = Artist.find(params[:artist_id])
+    @album = @artist.albums.new(album_params)
     if @album.save
       flash[:notice] = "Album successfully added!"
-      redirect_to albums_path
+      redirect_to album_path(@artist)
     else
       render :new
     end
@@ -30,6 +32,7 @@ class AlbumsController < ApplicationController
   def destroy
     @album = Album.find(params[:id])
     @album.destroy
+    flash[:alert] = "Album Deleted"
     redirect_to album_path(@album.artist_id)
   end
 
