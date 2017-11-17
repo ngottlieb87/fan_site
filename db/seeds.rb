@@ -1,5 +1,7 @@
 Genre.destroy_all
 Artist.destroy_all
+Album.destroy_all
+
 genre_list = [
   "Jazz",
   "Rock",
